@@ -1,0 +1,39 @@
+version: "2"
+services:
+  nodeapp:
+    image: badrinathpathak/studentmanagement:v1
+    labels:
+      com.example.description: "Student Management Webapp"
+    container_name: nodeapp_v1
+    ports:
+      - "8000:8000"
+    links:
+      - mongodb
+    environment:
+      MONGO_USER: badriuser
+      MONGO_PASS: badripass
+      MONGO_HOST: mongo_32
+      MONGO_PORT: 27017
+      MONGO_COLLECTION: student
+    depends_on:
+      - mongodb
+    restart: always
+    networks:
+      - my_net
+  
+  mongodb:
+    image: mongo:3.2
+    labels:
+      com.example.description: "Mongo Database"
+    container_name: mongo_32
+    environment:
+      MONGO_INITDB_ROOT_USER: badriuser
+      MONGO_INITDB_ROOT_PASS: badripass
+    volumes:
+      - ./database:/data/db
+    networks:
+      - my_net
+    
+networks:
+  my_net:
+    driver: bridge
