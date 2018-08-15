@@ -12,7 +12,7 @@
     "AngularJS",
     "Node.js"
   ],
-  "author": "Yuan Tu",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "angular": "1.5.5",
